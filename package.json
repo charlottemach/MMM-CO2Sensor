@@ -1,0 +1,12 @@
+{
+  "name": "MMM-CO2Sensor",
+  "main": "MMM-CO2Sensor.js",
+  "version": "1.0.0",
+  "description": "CO2sensor readings for the Magic Mirror.",
+  "author": "C.Mach",
+  "license": "MIT",
+  "dependencies": {
+    "python-shell": "latest",
+    "chart.js": "^2.7.0"
+  }
+}
