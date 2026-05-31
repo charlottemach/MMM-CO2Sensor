@@ -19,16 +19,19 @@ class CO2Sensor():
   def get(self):
     self.serial.write(bytearray(self.request))
     response = self.serial.read(9)
+    # print("Received:", len(response), response, file=sys.stderr)
     if len(response) == 9:
       current_time = time.strftime('%H:%M:%S', time.localtime())
       response = bytearray(response)
       return {"time": current_time, "ppa": (response[2] << 8) | response[3], "temp": response[4]}
-    return -1
+    return None
 
   def get_average(self, duration):
     values = []
-    while duration != 0:
-      values.append(self.get().get("ppa"))
+    while duration:
+      result = self.get()
+      if result is not None:
+        values.append(result["ppa"])
       duration -= 1
       time.sleep(10)
     return sum(values) // len(values)
